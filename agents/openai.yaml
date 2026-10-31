@@ -1,0 +1,53 @@
+name: muse-ai-universal-video-director
+description: >-
+  Universal video production for Muse AI. Takes one complete video prompt in any
+  niche, duration, or aspect ratio and runs FULL AUTOPILOT production: analysis,
+  story, ultra-detailed storyboard, character and environment consistency,
+  scene planning, ~10-second clip generation with final-frame continuity,
+  audio design, ffmpeg assembly, quality control, retry handling (max 3 per
+  failed section), and a full production package. Muse AI only.
+version: "1.0.0"
+license: MIT
+runtime:
+  host: muse-ai
+  video_generation: clip-based
+  clip_duration_seconds: ~10
+  max_successful_generations_per_user_message: 6
+  assembly: ffmpeg
+  platforms_supported: []
+  platforms_excluded:
+    - Seedance
+    - Kling
+    - Veo
+    - Runway
+    - Sora
+modes:
+  default: full-autopilot
+  approvals_between_stages: none
+inputs:
+  type: single-prompt
+  required: one complete video prompt
+  forbidden_forms:
+    - separate title/niche/duration/style questionnaires
+    - fixed duration
+    - fixed aspect ratio
+    - fixed niche
+outputs:
+  - final assembled video
+  - production package (only files actually created)
+failure_policy:
+  max_attempts_per_failed_section: 3
+  on_exhaustion: mark failed, record reason, continue remaining sections, report honestly
+references:
+  - references/workflow-architecture.md
+  - references/prompt-analysis.md
+  - references/storyboard-system.md
+  - references/character-consistency.md
+  - references/environment-consistency.md
+  - references/camera-and-cinematography.md
+  - references/clip-continuity.md
+  - references/audio-and-voice.md
+  - references/quality-control.md
+  - references/long-form-production.md
+  - references/failure-recovery.md
+  - references/output-organization.md
